@@ -1,0 +1,20 @@
+{
+  "name": "talvedo",
+  "interface": {
+    "displayName": "Talvedo"
+  },
+  "plugins": [
+    {
+      "name": "talvedo",
+      "source": {
+        "source": "local",
+        "path": "./plugins/talvedo"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

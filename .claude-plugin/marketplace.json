@@ -1,0 +1,15 @@
+{
+  "name": "talvedo",
+  "description": "The Talvedo plugin for Claude Code",
+  "owner": {
+    "name": "Talvedo",
+    "url": "https://talvedo.com"
+  },
+  "plugins": [
+    {
+      "name": "talvedo",
+      "source": "./plugins/talvedo",
+      "description": "Work in the Talvedo issue tracker from your agent: issues, epics, sprints, releases, tracks, labels, checklists and test runs, with a guide to the model and the usual tasks."
+    }
+  ]
+}

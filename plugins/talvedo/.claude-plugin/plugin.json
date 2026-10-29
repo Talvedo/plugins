@@ -1,0 +1,17 @@
+{
+  "name": "talvedo",
+  "description": "Work in the Talvedo issue tracker from your agent: issues, epics, sprints, releases, tracks, labels, checklists and test runs, with a guide to the model and the usual tasks.",
+  "author": {
+    "name": "Talvedo",
+    "url": "https://talvedo.com"
+  },
+  "homepage": "https://talvedo.com/help/mcp",
+  "repository": "https://github.com/Talvedo/plugins",
+  "license": "MIT",
+  "keywords": [
+    "talvedo",
+    "issue-tracker",
+    "project-management",
+    "mcp"
+  ]
+}

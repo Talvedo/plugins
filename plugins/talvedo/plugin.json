@@ -1,0 +1,44 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "talvedo",
+  "version": "1.0.0",
+  "description": "Work in the Talvedo issue tracker from your agent: issues, epics, sprints, releases, tracks, labels, checklists and test runs, with a guide to the model and the usual tasks.",
+  "author": {
+    "name": "Talvedo",
+    "url": "https://talvedo.com"
+  },
+  "homepage": "https://talvedo.com/help/mcp",
+  "repository": "https://github.com/Talvedo/plugins",
+  "license": "MIT",
+  "keywords": [
+    "talvedo",
+    "issue-tracker",
+    "project-management",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Talvedo",
+        "shortDescription": "Issues, sprints and tracks of your team in Talvedo",
+        "longDescription": "Work in the Talvedo issue tracker from your agent: issues, epics, sprints, releases, tracks, labels, checklists and test runs, with a guide to the model and the usual tasks.",
+        "developerName": "Talvedo",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://talvedo.com",
+        "privacyPolicyURL": "https://talvedo.com/privacy",
+        "termsOfServiceURL": "https://talvedo.com/terms",
+        "defaultPrompt": [
+          "Use Talvedo to show my open issues in the current sprint.",
+          "Use Talvedo to file issues for this plan in a new epic."
+        ],
+        "brandColor": "#5B47E0",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}

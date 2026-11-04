@@ -1,6 +1,6 @@
 ---
 name: talvedo
-description: How to work with the Talvedo issue tracker through the Talvedo MCP server. Use it for any Talvedo task: reading, filing or updating issues, epics, sprints, releases, tracks, labels, checklists and test runs, especially bulk work such as a batch of issues, sprint planning or splitting a feature across platforms.
+description: How to work with the Talvedo issue tracker through the Talvedo MCP server. Use it for any Talvedo task: reading, filing or updating issues, epics, sprints, releases, tracks, labels, checklists, process diagrams and test runs, especially bulk work such as a batch of issues, sprint planning or splitting a feature across platforms.
 ---
 
 # Working with Talvedo
@@ -18,6 +18,12 @@ Talvedo (https://talvedo.com) is the team's issue tracker. You reach it through 
 - **Feature and parts** - a feature is an issue without a track; `split_issue` creates one part per track, each with its own status, assignee and release. The feature status follows its parts. A track where the feature is not needed is marked "not needed".
 - **Parity matrix** - features as rows, tracks as columns. It is not an object: it is built from split features. Read it with `get_matrix`.
 - **Checklist** - a personal pass over issues; ticking an item never changes the issue.
+- **Process** - a diagram of a complex product flow in a project: booking a session, a payment through a bank, a payout. Every edit is a revision people can compare and restore; yours are marked as made by an agent and carry your note.
+  - **Lane** - who acts, top to bottom: Client, Therapist, Our server, Monobank, Timer.
+  - **Block** - one step in a lane and a column. Kinds: `start`, `step`, `decision` (a fork), `wait` (a webhook, a bank answer, a timer), `end`. Mode: `manual` - a person does it by hand, `auto` - the system does it. `system` names the external system the step works with (Monobank, Google Sheets): that marks an integration; empty - an internal step.
+  - **Status of a block** comes from its issues: an open bug - broken; all closed and one done - implemented; open issues - planned. A block without issues has a manual status: potential (default), planned or implemented.
+  - **Link** - `next`, `failure` (error, refusal) or `timeout` (time is up), with a condition label ("paid", "no answer in 15 min").
+  - **Checks** - dead ends, decisions with one branch, waits without a timeout, external calls without a failure branch, blocks no start reaches. They are hints: fix them or leave them on purpose.
 
 ## Before you start
 
@@ -38,6 +44,10 @@ Talvedo (https://talvedo.com) is the team's issue tracker. You reach it through 
 **Plan a sprint.** `list_sprints`, `create_sprint`, put issues in with `sprint` (number, `current`, `planned`), `start_sprint`. Completing a sprint and releasing a version are decisions a person makes in the app.
 
 **Checklist.** `create_checklist` from keys or from the conditions of `search_issues` (`from`), share it if the team should see it, tick with `check_checklist_item`.
+
+**Map a process from issues.** `list_processes` first: extend an existing process instead of making a twin. Read the epic and issues of the flow (`search_issues` with `epic` or `text`, `get_issue` for the logic). Name the lanes after who acts. Walk the happy path from a start to an end, then for every wait and every call to an external system add the `failure` and `timeout` branches - this is where the bugs hide. Attach to each block the issues that implement it (`issues` by key); a step nobody has filed stays without issues and shows as potential - list those to the person, file issues only when they ask. Leave `col` out: blocks line up along the links. `create_process` in one call, then fix what the checks report with `update_process` and a note on what and why.
+
+**Change a process.** `get_process`, then one `update_process` with all operations and a note. Do not rebuild a process from scratch to change it: people's edits and the history stay only if you change what needs changing.
 
 **Testing.** Cases WEB-T12: `create_test_case`; a run on a release or sprint: `create_test_run`; `record_test_result` with `createBug: true` files a bug from a failed step.
 

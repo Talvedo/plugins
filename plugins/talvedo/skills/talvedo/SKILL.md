@@ -24,6 +24,7 @@ Talvedo (https://talvedo.com) is the team's issue tracker. You reach it through 
   - **Status of a block** comes from its issues: an open bug - broken; all closed and one done - implemented; open issues - planned. A block without issues has a manual status: potential (default), planned or implemented.
   - **Link** - `next`, `failure` (error, refusal) or `timeout` (time is up), with a condition label ("paid", "no answer in 15 min").
   - **Checks** - dead ends, decisions with one branch, waits without a timeout, external calls without a failure branch, blocks no start reaches. They are hints: fix them or leave them on purpose.
+  - **Review** - a person reviews every process and approves a revision of it in the app; agents never approve. `review` is `approved`, `not approved yet` or `changed since approval`: a change of steps, links or lanes after approval waits for a person again, while moving blocks, step statuses and issues do not.
 
 ## Before you start
 
@@ -48,6 +49,8 @@ Talvedo (https://talvedo.com) is the team's issue tracker. You reach it through 
 **Map a process from issues.** `list_processes` first: extend an existing process instead of making a twin. Read the epic and issues of the flow (`search_issues` with `epic` or `text`, `get_issue` for the logic). Name the lanes after who acts. Walk the happy path from a start to an end, then for every wait and every call to an external system add the `failure` and `timeout` branches - this is where the bugs hide. Attach to each block the issues that implement it (`issues` by key); a step nobody has filed stays without issues and shows as potential - list those to the person, file issues only when they ask. Leave `col` and `row` out: blocks line up along the links, a branch into a taken cell goes a row lower in its lane, and independent scenarios of one process (each with its own start) stand side by side instead of mixing into one line. `create_process` in one call, then fix what the checks report with `update_process` and a note on what and why.
 
 **Change a process.** `get_issue` lists the processes and steps an issue stands in (`processes`). `get_process`, then one `update_process` with all operations and a note. Do not rebuild a process from scratch to change it: people's edits and the history stay only if you change what needs changing. People also arrange a process on a free canvas: `frames` in `get_process` name its scenarios with the blocks inside and `notes` carry their remarks - read them, they keep their places when you edit.
+
+**Build on a process.** Before you implement steps of a process, check `review` in `get_issue` (`processes`) or `list_processes`. Approved - build what it says. Not approved yet - it is a draft: tell the person. Changed since approval - `get_process` lists `changesSinceApproval`: these steps and links are not reviewed yet, and `get_process` with `revision` = `review.approved.revision` shows the approved version. `list_processes` with `review: pending` finds what waits for a person.
 
 **Testing.** Cases WEB-T12: `create_test_case`; a run on a release or sprint: `create_test_run`; `record_test_result` with `createBug: true` files a bug from a failed step.
 

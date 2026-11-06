@@ -52,6 +52,8 @@ Talvedo (https://talvedo.com) is the team's issue tracker. You reach it through 
 
 **Build on a process.** Before you implement steps of a process, check `review` in `get_issue` (`processes`) or `list_processes`. `stepsChangedSinceApproval` in `get_issue` names the steps of your issue that changed after approval and what changed in them. Approved - build what it says. Not approved yet - it is a draft: tell the person. Changed since approval - `get_process` lists `changesSinceApproval`: these steps and links are not reviewed yet, and `get_process` with `revision` = `review.approved.revision` shows the approved version. `list_processes` with `review: pending` finds what waits for a person, and `set_process_reviewer` asks someone to look after you changed a process. `list_inbox` tells the token owner when a process they created, approved, review or work in was approved or changed after approval, with the steps touched: re-read those steps before you go on. When `review` is `changes requested`, a person left `changeRequests`: fix each with `update_process`, then `resolve_process_request` with a note on what you did.
 
+**How the app sells.** A project of a team that sells an Atlassian Marketplace app can have it linked: `get_marketplace_app` gives installs, users and rating with the change over 7 and 30 days, and for the project lead and admins the licenses, revenue over 30 days, the latest sales and uninstall feedback. Read the feedback before you suggest what to build next; quote numbers as they are, in US dollars.
+
 **Testing.** Cases WEB-T12: `create_test_case`; a run on a release or sprint: `create_test_run`; `record_test_result` with `createBug: true` files a bug from a failed step.
 
 ## Rules

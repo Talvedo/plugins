@@ -55,6 +55,8 @@ Talvedo (https://talvedo.com) is the team's issue tracker. You reach it through 
 
 **Start from a template.** For a typical flow - payment through a bank, booking a slot with a hold, sign-up with email confirmation, refund, subscription renewal, payout, onboarding - call `list_process_templates` and pass the id to `create_process` as `template`: the diagram comes with failure and timeout branches, entity states and time. Then adapt it with `update_process`: real system names, your times, issues.
 
+**Mermaid in and out.** `get_process` with `format: mermaid` gives the diagram as a Mermaid flowchart (lanes as subgraphs, failure `==>`, timeout `-.->`) and entity machines as stateDiagram: paste it into a PR or docs. `create_process` with `mermaid` turns a flowchart into a process; Mermaid from Talvedo comes back unchanged.
+
 **See an entity across processes.** Steps of different processes set states of one entity: the order moves a Booking from Awaiting payment to Paid, the refund from Paid to Refunded. `get_entity` joins them into one life cycle for the project, with the process and step behind each transition, and checks: `state_dead` (nothing leads out), `state_unreached` (nothing leads in), `state_similar` (one state under two names). Use the same spelling of a state in every process; a person renames a state in all processes at once in the Entities tab.
 
 **Put time on the diagram.** Give a timeout link `after` ("15 min") and a step its `duration` from and to ("1-20 min") instead of writing times into labels: the `timeout_race` check then catches a timeout that fires before the step can finish, and each path in `get_process` shows its `time`. To change a link, add it again with the same from, to and kind.

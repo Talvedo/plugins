@@ -11,7 +11,7 @@ Talvedo (https://talvedo.com) is the team's issue tracker. You reach it through 
 
 - **Workspace** - the team. Members have a role and a specialization (iOS, Android, Infrastructure...): `list_members`.
 - **Project** - a key (WEB) and its own statuses, issue types and tracks: `list_projects`. Scrum projects have sprints, kanban projects flow without them.
-- **Issue** - WEB-142. Status, type, priority, assignee, labels, start and due dates, estimate in points, sprint, release, epic, track. Description and comments are Markdown.
+- **Issue** - WEB-142. Status, type, priority, assignee, labels, start and due dates, estimate in points, sprint, release, epic, track. Description and comments are Markdown; `@Full Name` or `@email` in them mentions a member, and in a comment the person gets it in the inbox.
 - **Subtask** - a step of one issue (`parent`). **Epic** - groups issues, also of several projects (`create_epic`, then the `epic` field). Never create an issue titled "Epic: ...".
 - **Label** - shared by the whole workspace: `list_labels`, `create_label`.
 - **Track** - a line of work inside a project (Server, Web, iOS, Android, Infra) with its own board, lead and releases. Tracks are set up with `create_track` and `update_track` by the project lead or an admin.

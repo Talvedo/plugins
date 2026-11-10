@@ -85,6 +85,10 @@ Talvedo (https://talvedo.com) is the team's issue tracker. You reach it through 
 
 **Trust a document as much as it deserves.** `mayBeOutdated` in `list_docs` and `get_doc` means its issues were closed after the last edit and review, or its review term has passed. Check such a document against the code instead of following it blindly. When you have checked it and it is right, `save_doc` with `reviewed: true`; when it is wrong, fix the section and say what changed in `note`.
 
+**Follow the rules of the project.** `get_agent_rules` returns the rules the team wrote for agents and the table of where things are. Read it before the code in a project you do not know. If a rule is wrong or missing, say so to the person or propose a change to the rules document.
+
+**Change an approved document.** A person marks a document approved when the team may rely on it (`review` in `get_doc`). `save_doc` does not change the text of such a document at once: it files a proposal with your `note`, and a person compares it with the text and accepts or rejects it in the app. Write the note for that person: what changes and why. A document nobody approved you change directly. Only a person approves.
+
 **Hand the work over.** A project keeps one handoff note for agents. At the start of a session call `get_doc` with doc `handoff`: what the previous session did, what is left and where it stopped. Before you finish, `save_doc` with doc `handoff` and the whole new text: done, left, where you stopped, what to check first. It is a note for the next agent, not a log: rewrite it, do not append forever.
 
 **Move a release.** `update_release` changes the release date, whether it is approximate, the code freeze, the name and the version. Move the issues first (`bulk_update_issues` with `release`), then the dates. Releasing a version stays with a person.

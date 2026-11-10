@@ -77,6 +77,12 @@ Talvedo (https://talvedo.com) is the team's issue tracker. You reach it through 
 
 **How the app sells.** A project of a team that sells an Atlassian Marketplace app can have it linked: `get_marketplace_app` gives installs, users and rating with the change over 7 and 30 days, and for the project lead and admins the licenses, revenue over 30 days, the latest sales and uninstall feedback. Read the feedback before you suggest what to build next; quote numbers as they are, in US dollars.
 
+**Read the documents of a project.** `list_docs` is the map: every document with its kind and the `when` line that says when to open it. Pick by `when`, do not read everything. `get_doc` returns a short document whole and a long one as its outline: read the section you need with `section` (the anchor from the outline). When you come back to a document you already read, pass `since` with the revision you saw: only the changed sections return. `search_docs` finds a phrase across documents.
+
+**Write documents.** `save_doc` without `doc` creates one; give it a `kind` (spec, policy, meeting, guide, rules, page) and a `when` line so the next agent can pick it from the map. To change a part of a document use `section` with the new text or `append`; replacing the whole text needs `version` from `get_doc`. Each change of yours is a separate revision with your `note`, and a person can compare and restore revisions. Keep the tree shallow: three levels at most.
+
+**Hand the work over.** A project keeps one handoff note for agents. At the start of a session call `get_doc` with doc `handoff`: what the previous session did, what is left and where it stopped. Before you finish, `save_doc` with doc `handoff` and the whole new text: done, left, where you stopped, what to check first. It is a note for the next agent, not a log: rewrite it, do not append forever.
+
 **Move a release.** `update_release` changes the release date, whether it is approximate, the code freeze, the name and the version. Move the issues first (`bulk_update_issues` with `release`), then the dates. Releasing a version stays with a person.
 
 **Testing.** Cases WEB-T12: `create_test_case`; a run on a release or sprint: `create_test_run`; `record_test_result` with `createBug: true` files a bug from a failed step.

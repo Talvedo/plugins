@@ -91,6 +91,8 @@ Talvedo (https://talvedo.com) is the team's issue tracker. You reach it through 
 
 **Change an approved document.** A person marks a document approved when the team may rely on it (`review` in `get_doc`). `save_doc` does not change the text of such a document at once: it files a proposal with your `note`, and a person compares it with the text and accepts or rejects it in the app. Write the note for that person: what changes and why. A document nobody approved you change directly. Only a person approves.
 
+**Documents as files.** When a project mirrors its documents to a repository, `get_doc` names the `file`. The file and the document are the same text: edit whichever is closer - a commit to the folder comes back as a revision, `save_doc` goes out as a commit. Do not edit both at once; if `fileState` says conflict, tell the person, they choose a side in the app.
+
 **Hand the work over.** A project keeps one handoff note for agents. At the start of a session call `get_doc` with doc `handoff`: what the previous session did, what is left and where it stopped. Before you finish, `save_doc` with doc `handoff` and the whole new text: done, left, where you stopped, what to check first. It is a note for the next agent, not a log: rewrite it, do not append forever.
 
 **Move a release.** `update_release` changes the release date, whether it is approximate, the code freeze, the name and the version. Move the issues first (`bulk_update_issues` with `release`), then the dates. Releasing a version stays with a person.

@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "talvedo",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "Work in the Talvedo issue tracker from your agent: issues, epics, sprints, releases, tracks, labels, checklists and test runs, with a guide to the model and the usual tasks.",
   "author": {
     "name": "Talvedo",

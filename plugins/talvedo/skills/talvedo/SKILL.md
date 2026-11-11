@@ -35,11 +35,11 @@ Talvedo (https://talvedo.com) is the team's issue tracker. You reach it through 
 
 ## Recipes
 
-**File a batch of work.** `create_epic` (or reuse one), then `create_issue` per item with `epic`, type, priority and a Markdown description with acceptance criteria. Link order with `link_issues` (`blocks`). Change many at once with `bulk_update_issues` (up to 100).
+**File a batch of work.** `create_epic` (or reuse one), then `create_issue` per item with `epic`, type, priority and a Markdown description and `criteria` - the acceptance criteria as a list of lines (`update_issue` changes them later, `checkCriteria` marks one done). Link order with `link_issues` (`blocks`). Change many at once with `bulk_update_issues` (up to 100).
 
 **Set up tracks.** `create_track` with `defaults: true` adds Server, Web, iOS and Android (Server goes first). Add others by name (`Infra`), give each a `lead`: `split_issue` assigns parts to the track lead.
 
-**One feature on several platforms.** Create the issue without a track (type feature), then `split_issue` with `skip` for the tracks where it is not needed and `assignees` per track if the lead is not the right person. Follow progress with `get_matrix`: `behindBy` shows what a track lags behind.
+**One feature on several platforms.** Create the issue without a track (type feature), then `split_issue` with `skip` for the tracks where it is not needed and `assignees` per track if the lead is not the right person. Follow progress with `get_matrix`: `behindBy` shows what a track lags behind. Work already done on a track as an ordinary issue (built before features existed) joins the feature with `update_issue` and `feature`: it keeps its history, time and code. A large matrix is read by `epic` or page by page with `offset`.
 
 **Work on an issue.** Move it to the in-progress status when you start, comment what was done with the commit or pull request when you finish, then move it to done. Something left over is a new issue, not a line in a comment.
 
